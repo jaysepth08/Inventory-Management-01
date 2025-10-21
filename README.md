@@ -85,7 +85,7 @@ User
 Testing Examples
 Create Product
 
-POST https://inventory-management-01-1.onrender.com/api/products "Content-Type: application/json" '{ "sku": "P001", "name": "Tuyo", "price": 80, "stock": 249 }'
+POST https://inventory-management-01-1.onrender.com/api/products "Content-Type: application/json" '{ "sku": "P001", "name": "Iphone 17 pro max", "price": 79,990.00, "stock": 500 }'
 Create Supplier
 
 POST https://inventory-management-01-1.onrender.com/api/suppliers "Content-Type: application/json" '{ "name": "Acme Supplies", "contact": "acme@example.com" }'
