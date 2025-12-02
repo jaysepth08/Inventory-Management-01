@@ -21,7 +21,7 @@ app.use(cors({
 }));
 
 // FIXED: Express 5 does NOT support "*"
-app.options("/*", cors());
+app.options(cors());
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -33,11 +33,12 @@ app.use('/api/suppliers', supplierRoutes);
 app.use('/api', orderRoutes);
 
 // FIXED 404 handler
-app.all("/*", (req, res) => {
+app.all((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
 
