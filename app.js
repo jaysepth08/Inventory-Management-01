@@ -13,27 +13,31 @@ connectDB();
 
 const app = express();
 const cors = require("cors");
-app.use(cors({
-    origin: "*", // or specify your frontend URL
-    methods: ["GET,POST,PUT,DELETE"],
-    allowedHeaders: ["Content-Type"]
-}));
-app.options("*", cors());
-app.use(express.json());
 
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"]
+}));
+
+// FIXED: Express 5 does NOT support "*"
+app.options("/*", cors());
+
+app.use(express.json());
 app.use(bodyParser.json());
 
+// Routes
 app.use('/api', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/suppliers', supplierRoutes);
 app.use('/api', orderRoutes);
 
-app.use((req, res) => {
+// FIXED 404 handler
+app.all("/*", (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
-
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
